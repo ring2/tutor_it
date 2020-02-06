@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xyz.ring2.admin.core.mapper.UserMapper">
+    <select id="selUserListWithRoleInfo" resultType="xyz.ring2.admin.core.entity.vo.UserVo">
+    SELECT USER.*,
+	role.name_zh roleName
+    FROM
+	back_user USER inner JOIN back_role role
+	INNER JOIN back_user_role_rel rel ON user.id = rel.user_id ${ew.customSqlSegment}
+    </select>
+</mapper>
