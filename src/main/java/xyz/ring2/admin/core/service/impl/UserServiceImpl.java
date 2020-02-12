@@ -1,10 +1,10 @@
 package xyz.ring2.admin.core.service.impl;
 
 import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -56,7 +56,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         page.setCurrent(pageNo);
         page.setSize(pageSize);
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        if (StringUtils.isNotEmpty(userName)){
+        if (StrUtil.isNotEmpty(userName)){
             queryWrapper.like("username",userName);
         }
         Page<UserVo> userPage = this.baseMapper.selUserListWithRoleInfo(page, queryWrapper);
@@ -72,6 +72,10 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
      */
     @Override
     public boolean saveUser(User user) {
+        List<User> list = this.lambdaQuery().eq(User::getUsername, user.getUsername()).list();
+        if (list.size() > 0){
+            return false;
+        }
         String encodePwd = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodePwd);
         return save(user);

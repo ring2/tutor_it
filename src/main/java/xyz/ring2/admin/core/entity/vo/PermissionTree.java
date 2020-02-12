@@ -1,7 +1,7 @@
 package xyz.ring2.admin.core.entity.vo;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
-import xyz.ring2.admin.core.entity.Permission;
 
 import java.util.List;
 
@@ -10,10 +10,11 @@ import java.util.List;
  * @date :   2020/2/4 20:05
  **/
 @Data
-public class MenuVo {
+public class PermissionTree {
     private Integer id;
     private String name;
     private String uri;
     private String icon;
-    private List<MenuVo> children;
+    @JsonInclude(JsonInclude.Include.NON_EMPTY)
+    private List<PermissionTree> children;
 }

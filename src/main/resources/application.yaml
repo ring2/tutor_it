@@ -4,6 +4,10 @@ spring:
     username: root
     password: wqq123
     driver-class-name: com.mysql.cj.jdbc.Driver
+  devtools:
+    restart:
+      enabled: true  #设置开启热部署
+      additional-paths: src/main/java #重启目录
 mybatis-plus:
   global-config:
     db-config:
@@ -25,3 +29,4 @@ jwt:
   expiration: 86400
   # 配置不需要认证的接口
   antMatchers: /login/**,/favicon.ico
+

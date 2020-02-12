@@ -2,4 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="xyz.ring2.admin.core.mapper.PermissionMapper">
 
+    <select id="getPermissionTree" resultType="xyz.ring2.admin.core.entity.Permission">
+    SELECT
+	    *
+    FROM
+	    back_permission p
+    WHERE
+	p.id IN ( SELECT r.permission_id FROM back_role role JOIN back_role_permission_rel r ON r.role_id IN <foreach  item="item" collection="ids" index="index"  open="(" separator="," close=")">#{item}</foreach> )
+	AND
+	p.pid = #{pid}
+    </select>
 </mapper>

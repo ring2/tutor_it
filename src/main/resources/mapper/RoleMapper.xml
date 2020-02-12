@@ -3,7 +3,7 @@
 <mapper namespace="xyz.ring2.admin.core.mapper.RoleMapper">
 
     <select id="selectRolesByUserId" resultType="xyz.ring2.admin.core.entity.Role">
-        select name from back_role where id in
-         (select role_id from back_user_role_rel where role_id = #{id} );
+        select * from back_role where id in
+         (select role_id from back_user_role_rel where user_id = #{id} );
     </select>
 </mapper>

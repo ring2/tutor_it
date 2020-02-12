@@ -24,8 +24,14 @@ public class LoginController {
     @Autowired
     JwtTokenUtil jwtTokenUtil;
 
+    /**
+     *
+     * @param user
+     * @return 根据用户的账号密码及验证码进行校验登陆
+     */
     @PostMapping("/login")
     public RestResult<Map> login(@RequestBody User user){
+        //TODO 开发阶段暂时不做校验
         Map<String,String> data = new HashMap<>();
         data.put("token",jwtTokenUtil.generateToken(user));
         data.put("tokenHead", JWTConfig.tokenHead);

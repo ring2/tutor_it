@@ -2,7 +2,6 @@ package xyz.ring2.admin;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import org.apache.commons.lang3.StringUtils;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,11 +13,10 @@ import xyz.ring2.admin.core.entity.User;
 import xyz.ring2.admin.core.entity.vo.UserVo;
 import xyz.ring2.admin.core.mapper.UserMapper;
 import xyz.ring2.admin.core.service.IUserService;
-import xyz.ring2.admin.utils.FieldCheckUtils;
+import xyz.ring2.admin.core.service.impl.RoleServiceImpl;
 import xyz.ring2.admin.utils.JwtTokenUtil;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * @author :  weiquanquan
@@ -38,6 +36,8 @@ public class Test1 {
 
     @Autowired
     UserMapper userMapper;
+    @Autowired
+    RoleServiceImpl roleService;
 
     @Test
     public void testUser() {
@@ -77,5 +77,10 @@ public class Test1 {
 //        boolean username = FieldCheckUtils.isFieldsNotNull(user, "username");
 //        Assert.assertTrue(username);
       //  System.out.println(FieldCheckUtils.isFieldsNotEmpty(user, "username", "password"));
+    }
+    @Test
+    public void testRoleService(){
+        boolean b = roleService.removeRole((long) 3);
+        System.out.println(b);
     }
 }

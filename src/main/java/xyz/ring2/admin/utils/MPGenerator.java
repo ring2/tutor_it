@@ -13,6 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+/**
+ *  mybatis-plus 代码生成器模板
+ */
 public class MPGenerator {
 
     /**
