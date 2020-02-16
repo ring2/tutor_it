@@ -1,9 +1,10 @@
 package xyz.ring2.admin;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
-import xyz.ring2.admin.utils.TutorITApplication;
+import xyz.ring2.admin.common.TutorITApplication;
 
 /**
  * TutorIT-Admin 启动类入口
@@ -17,7 +18,7 @@ public class TutorAdminApplication implements CommandLineRunner {
     }
 
     @Override
-    public void run(String... args) throws Exception {
-        log.info("服务启动成功！");
+    public void run(String... args) {
+        log.info("服务启动成功{}！");
     }
 }

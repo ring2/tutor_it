@@ -1,7 +1,9 @@
-package xyz.ring2.admin.utils;
+package xyz.ring2.admin.common;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ComponentScans;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.lang.annotation.Inherited;
@@ -11,7 +13,7 @@ import java.lang.annotation.RetentionPolicy;
 /**
  * @author :     weiquanquan
  * @date :       2020/2/13 10:14
- * description:  自定义注解，美化启动类上的注解
+ * description:  自定义注解，集中配置启动类上的注解
  **/
 @SpringBootApplication
 @MapperScan("xyz.ring2.admin.core.mapper") //mp注解 扫描mapper接口

@@ -134,10 +134,5 @@ public class FieldCheckUtils {
         return serializedLambda;
     }
 
-    public static void main(String[] args) {
-        User user = new User();
-        user.setUsername("sanmao");
-        System.out.println(isFieldsNotEmpty(user,User::getUsername,User::getPassword));
-    }
 
 }
