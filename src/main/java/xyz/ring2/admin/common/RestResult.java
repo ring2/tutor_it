@@ -15,7 +15,7 @@ import java.util.function.Supplier;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @NoArgsConstructor
 @Accessors(chain = true)
-public class RestResult<T>  {
+public class RestResult<T> {
     private Integer statusCode;
     private String message;
     private T data;
@@ -25,6 +25,7 @@ public class RestResult<T>  {
         this.message = commonStatus.getMessage();
         this.data = data;
     }
+
     public RestResult(CommonStatus commonStatus) {
         this.statusCode = commonStatus.getStatusCode();
         this.message = commonStatus.getMessage();
@@ -33,6 +34,7 @@ public class RestResult<T>  {
     public static <T> RestResult success(T data) {
         return new RestResult<>(CommonStatus.SUCCESS, data);
     }
+
     public static <T> RestResult<T> success() {
         return new RestResult<>(CommonStatus.SUCCESS);
     }
@@ -52,11 +54,17 @@ public class RestResult<T>  {
     public static <T> RestResult<T> failure() {
         return new RestResult<>(CommonStatus.FAILURE);
     }
+
     public static <T> RestResult<T> failureOfParam() {
         return new RestResult<>(CommonStatus.FAILED_BAD_PARAM);
     }
+
     public static <T> RestResult<T> failureOfRepeatName() {
         return new RestResult<>(CommonStatus.REPEAT_NAME);
+    }
+
+    public static <T> RestResult<T> failureOfCaptcha() {
+        return new RestResult<>(CommonStatus.FAILED_CAPTCHA);
     }
 
 }

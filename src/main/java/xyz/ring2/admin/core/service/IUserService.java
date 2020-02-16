@@ -24,4 +24,5 @@ public interface IUserService extends IService<User> {
      User findUserByUsername(String username);
      Map<String,Object> selUserListWithRoleInfo(Integer pageNo,Integer pageSize,String userName);
      boolean saveUser(User user);
+     Boolean validateUser(String username,String password);
 }

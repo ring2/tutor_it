@@ -22,7 +22,7 @@ import java.util.Map;
 
 /**
  * <p>
- *  服务实现类
+ * 服务实现类
  * </p>
  *
  * @author ring2
@@ -38,46 +38,58 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     PasswordEncoder passwordEncoder;
 
     @Override
-    public User findUserByUsername(String username){
+    public User findUserByUsername(String username) {
         User user = getOne(new QueryWrapper<User>().eq("username", username));
-        if (ObjectUtil.isNotEmpty(user)){
+        if (ObjectUtil.isNotEmpty(user)) {
             List<Role> roles = roleService.selectRolesByUserId(user.getId());
             user.setRoles(roles);
-        }else{
+        } else {
             throw new UsernameNotFoundException("用户名不存在");
         }
         return user;
     }
 
     @Override
-    public Map<String,Object> selUserListWithRoleInfo(Integer pageNo,Integer pageSize,String userName) {
-        Map<String,Object> data = new HashMap<>();
+    public Map<String, Object> selUserListWithRoleInfo(Integer pageNo, Integer pageSize, String userName) {
+        Map<String, Object> data = new HashMap<>();
         Page<User> page = new Page<>();
         page.setCurrent(pageNo);
         page.setSize(pageSize);
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        if (StrUtil.isNotEmpty(userName)){
-            queryWrapper.like("username",userName);
+        if (StrUtil.isNotEmpty(userName)) {
+            queryWrapper.like("username", userName);
         }
         Page<UserVo> userPage = this.baseMapper.selUserListWithRoleInfo(page, queryWrapper);
-        data.put("total",userPage.getTotal());
-        data.put("userList",userPage.getRecords());
+        data.put("total", userPage.getTotal());
+        data.put("userList", userPage.getRecords());
         return data;
     }
 
     /**
-     *  新增用户
+     * 新增用户
+     *
      * @param user
      * @return
      */
     @Override
     public boolean saveUser(User user) {
         List<User> list = this.lambdaQuery().eq(User::getUsername, user.getUsername()).list();
-        if (list.size() > 0){
+        if (list.size() > 0) {
             return false;
         }
         String encodePwd = passwordEncoder.encode(user.getPassword());
         user.setPassword(encodePwd);
         return save(user);
+    }
+
+    @Override
+    public Boolean validateUser(String username, String password) {
+        User user = findUserByUsername(username);
+        boolean matches = passwordEncoder.matches(password, user.getPassword());
+        if (!matches) {
+            throw new UsernameNotFoundException("密码错误");
+        }
+        List<User> list = lambdaQuery().eq(User::getUsername, username).list();
+        return list.size() > 0;
     }
 }

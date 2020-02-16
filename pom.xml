@@ -92,6 +92,17 @@
             <artifactId>hutool-all</artifactId>
             <version>5.1.1</version>
         </dependency>
+        <!--redis 内存数据库 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+        <!-- 验证码工具包 -->
+        <dependency>
+            <groupId>com.github.whvcse</groupId>
+            <artifactId>easy-captcha</artifactId>
+            <version>1.6.2</version>
+        </dependency>
         <!--一个对Spring Boot配置文件进行敏感信息加密的工具 -->
         <!-- https://mvnrepository.com/artifact/com.github.ulisesbocchio/jasypt-spring-boot-starter -->
         <dependency>

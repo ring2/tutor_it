@@ -17,7 +17,8 @@ public enum CommonStatus {
     REPEAT_NAME("用户名重复",401),
     FAILED_AUTHORITY("权限不足",300),
     FAILED_NOT_LOGIN("暂未登录",402),
-    FAILED_BAD_PARAM("参数无效",403);
+    FAILED_BAD_PARAM("参数无效",403),
+    FAILED_CAPTCHA("验证码错误",405);
 
     private String message;
     private Integer statusCode;

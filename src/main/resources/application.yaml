@@ -8,6 +8,23 @@ spring:
     restart:
       enabled: true  #设置开启热部署
       additional-paths: src/main/java #重启目录
+  # Redis 相关配置
+  redis:
+    host: localhost # Redis服务器地址
+    database: 0 # Redis数据库索引（默认为0）
+    port: 6379 # Redis服务器连接端口
+    password: # Redis服务器连接密码（默认为空）
+    jedis:
+      pool:
+        max-active: 8 # 连接池最大连接数（使用负值表示没有限制）
+        max-wait: -1ms # 连接池最大阻塞等待时间（使用负值表示没有限制）
+        max-idle: 8 # 连接池中的最大空闲连接
+        min-idle: 0 # 连接池中的最小空闲连接
+    timeout: 3000ms # 连接超时时间（毫秒）
+redis:
+  key:
+    prefix: "tutor-admin"
+
 mybatis-plus:
   global-config:
     db-config:
@@ -28,7 +45,7 @@ jwt:
   # 过期时间 单位秒 1天后过期=86400 7天后过期=604800
   expiration: 86400
   # 配置不需要认证的接口
-  antMatchers: /login/**,/favicon.ico
+  antMatchers: /login/**,/favicon.ico,/captcha
 
 # 加密使用的算法
 jasypt:
@@ -36,5 +53,3 @@ jasypt:
     password: tutorIT666
     property:
       prefix: Tutor
-#ENC(sZHIFuKC7912feUW5DYEj9Y/D1kgmzIZ1ulgeX/lq22MvpLcoiSvhHF9vL/+6o3M)
-#ENC(Gkf/yCY2yVCj6u+SRmfcWlAfLIcTyiif6qZPFTp7GBEJy6fePDCJfSAavrONlCwS)
