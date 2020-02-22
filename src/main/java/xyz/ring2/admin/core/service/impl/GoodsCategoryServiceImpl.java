@@ -10,8 +10,6 @@ import xyz.ring2.admin.core.entity.GoodsCategory;
 import xyz.ring2.admin.core.entity.vo.GoodsCategoryTree;
 import xyz.ring2.admin.core.mapper.GoodsCategoryMapper;
 import xyz.ring2.admin.core.service.GoodsCategoryService;
-import xyz.ring2.admin.exception.ServiceException;
-import xyz.ring2.admin.exception.ServiceExceptionEnum;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -95,10 +93,6 @@ public class GoodsCategoryServiceImpl extends ServiceImpl<GoodsCategoryMapper, G
             );
         }
         return list;
-    }
-
-    public void test(){
-        throw new ServiceException(ServiceExceptionEnum.NOT_FOUND_USER);
     }
 
 }

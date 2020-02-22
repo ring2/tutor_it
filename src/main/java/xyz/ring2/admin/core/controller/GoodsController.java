@@ -29,18 +29,18 @@ public class GoodsController {
         Map<String, Object> map;
         Page<GoodsCategory> page = null;
         if (pageNum != null && pageSize != null) {
-            page = new Page<>(pageNum,pageSize);
+            page = new Page<>(pageNum, pageSize);
         }
         map = categoryService.selGoodsCategoryByPage(page, type);
-        if (map != null){
+        if (map != null) {
             return RestResult.success(map);
         }
         return RestResult.failureOfQuery();
     }
 
     @DeleteMapping()
-    public RestResult delGoodsCategory(GoodsCategory goodsCate){
-        if (goodsCate != null){
+    public RestResult delGoodsCategory(GoodsCategory goodsCate) {
+        if (goodsCate != null) {
             goodsCate.setCateDeleted(true);
             boolean b = categoryService.updateById(goodsCate);
             if (b) return RestResult.success();
@@ -50,10 +50,10 @@ public class GoodsController {
     }
 
     @PostMapping
-    public RestResult saveGoodsCate(@RequestBody GoodsCategory goodsCategory){
+    public RestResult saveGoodsCate(@RequestBody GoodsCategory goodsCategory) {
         boolean fieldsNotEmpty = FieldCheckUtils.isFieldsNotEmpty(goodsCategory, GoodsCategory::getCatePid, GoodsCategory::getCateName, GoodsCategory::getCateLevel);
-        if (fieldsNotEmpty){
-            if (categoryService.save(goodsCategory)){
+        if (fieldsNotEmpty) {
+            if (categoryService.save(goodsCategory)) {
                 return RestResult.success();
             }
             return RestResult.failure();
@@ -62,19 +62,14 @@ public class GoodsController {
     }
 
     @PutMapping
-    public RestResult updateGoodsCateName(@RequestBody GoodsCategory goodsCategory){
+    public RestResult updateGoodsCateName(@RequestBody GoodsCategory goodsCategory) {
         boolean fieldsNotEmpty = FieldCheckUtils.isFieldsNotEmpty(goodsCategory, GoodsCategory::getId, GoodsCategory::getCateName);
         if (fieldsNotEmpty) {
-            if (categoryService.updateById(goodsCategory)){
+            if (categoryService.updateById(goodsCategory)) {
                 return RestResult.success();
             }
             return RestResult.failure();
         }
         return RestResult.failureOfParam();
-    }
-
-    @GetMapping("test")
-    public void test(){
-        categoryService.test();
     }
 }
