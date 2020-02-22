@@ -73,4 +73,8 @@ public class GoodsController {
         return RestResult.failureOfParam();
     }
 
+    @GetMapping("test")
+    public void test(){
+        categoryService.test();
+    }
 }

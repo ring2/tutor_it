@@ -12,7 +12,6 @@ import xyz.ring2.admin.common.RestResult;
 import xyz.ring2.admin.core.entity.User;
 import xyz.ring2.admin.core.entity.vo.CaptchaVo;
 import xyz.ring2.admin.core.service.IUserService;
-import xyz.ring2.admin.core.service.impl.UserServiceImpl;
 import xyz.ring2.admin.security.jwt.JWTConfig;
 import xyz.ring2.admin.utils.JwtTokenUtil;
 import xyz.ring2.admin.utils.RedisUtil;
@@ -44,7 +43,6 @@ public class LoginController {
      */
     @PostMapping("/login")
     public RestResult<Map> login(@RequestBody CaptchaVo captchaVo) {
-        Map<String, String> data = new HashMap<>();
         String username = captchaVo.getUsername();
         String password = captchaVo.getPassword();
         String key = captchaVo.getKey();
@@ -55,14 +53,7 @@ public class LoginController {
         }
         // 首先判断验证码是否有效
         if (StrUtil.isNotEmpty(result) && redisUtil.get(key).equals(result.trim())) {
-            Boolean valid = userService.validateUser(username, password);
-            if (valid) {
-                data.put("token", jwtTokenUtil.generateToken(new User().setUsername(username)));
-                data.put("tokenHead", JWTConfig.tokenHead);
-                return RestResult.success(data);
-            } else {
-              return RestResult.failure();
-            }
+           return  userService.validateUser(username, password);
         }
         return RestResult.failureOfCaptcha();
     }

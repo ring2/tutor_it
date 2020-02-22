@@ -1,10 +1,10 @@
 package xyz.ring2.admin.common;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.experimental.Accessors;
-
-import java.util.function.Supplier;
 
 /**
  * @author :  weiquanquan
@@ -24,6 +24,10 @@ public class RestResult<T> {
         this.statusCode = commonStatus.getStatusCode();
         this.message = commonStatus.getMessage();
         this.data = data;
+    }
+
+    public RestResult(String message) {
+        this.message = message;
     }
 
     public RestResult(CommonStatus commonStatus) {
@@ -55,6 +59,14 @@ public class RestResult<T> {
         return new RestResult<>(CommonStatus.FAILURE);
     }
 
+    public static <T> RestResult<T> failure(String message) {
+        return new RestResult<>(message);
+    }
+
+    public static <T> RestResult<T> failure(CommonStatus commonStatus) {
+        return new RestResult<>(commonStatus);
+    }
+
     public static <T> RestResult<T> failureOfParam() {
         return new RestResult<>(CommonStatus.FAILED_BAD_PARAM);
     }
@@ -65,6 +77,14 @@ public class RestResult<T> {
 
     public static <T> RestResult<T> failureOfCaptcha() {
         return new RestResult<>(CommonStatus.FAILED_CAPTCHA);
+    }
+
+    public static <T> RestResult<T> failureOfPassword() {
+        return new RestResult<>(CommonStatus.FAILED_PASSWORD);
+    }
+
+    public static <T> RestResult<T> failureOfUsername() {
+        return new RestResult<>(CommonStatus.FAILED_FOUND_NAME);
     }
 
 }

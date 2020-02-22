@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.toolkit.Constants;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.transaction.annotation.Transactional;
+import xyz.ring2.admin.common.RestResult;
 import xyz.ring2.admin.core.entity.User;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -24,5 +25,5 @@ public interface IUserService extends IService<User> {
      User findUserByUsername(String username);
      Map<String,Object> selUserListWithRoleInfo(Integer pageNo,Integer pageSize,String userName);
      boolean saveUser(User user);
-     Boolean validateUser(String username,String password);
+     RestResult validateUser(String username, String password);
 }

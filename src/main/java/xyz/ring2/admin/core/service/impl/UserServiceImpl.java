@@ -6,15 +6,21 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import xyz.ring2.admin.common.CommonStatus;
+import xyz.ring2.admin.common.RestResult;
 import xyz.ring2.admin.core.entity.Role;
 import xyz.ring2.admin.core.entity.User;
 import xyz.ring2.admin.core.entity.vo.UserVo;
 import xyz.ring2.admin.core.mapper.UserMapper;
 import xyz.ring2.admin.core.service.IRoleService;
 import xyz.ring2.admin.core.service.IUserService;
+import xyz.ring2.admin.exception.ServiceException;
+import xyz.ring2.admin.security.jwt.JWTConfig;
+import xyz.ring2.admin.utils.JwtTokenUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -37,14 +43,17 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     @Autowired
     PasswordEncoder passwordEncoder;
 
+    @Autowired
+    JwtTokenUtil jwtTokenUtil;
+
     @Override
     public User findUserByUsername(String username) {
         User user = getOne(new QueryWrapper<User>().eq("username", username));
         if (ObjectUtil.isNotEmpty(user)) {
             List<Role> roles = roleService.selectRolesByUserId(user.getId());
             user.setRoles(roles);
-        } else {
-            throw new UsernameNotFoundException("用户名不存在");
+        }else {
+            throw new ServiceException(CommonStatus.FAILED_FOUND_NAME);
         }
         return user;
     }
@@ -83,13 +92,22 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
-    public Boolean validateUser(String username, String password) {
+    public RestResult validateUser(String username, String password) {
+        Map<String, String> data = new HashMap<>();
         User user = findUserByUsername(username);
+        if (user == null){
+            return RestResult.failureOfUsername();
+        }
         boolean matches = passwordEncoder.matches(password, user.getPassword());
         if (!matches) {
-            throw new UsernameNotFoundException("密码错误");
+            return RestResult.failureOfPassword();
         }
         List<User> list = lambdaQuery().eq(User::getUsername, username).list();
-        return list.size() > 0;
+        if (list.size() > 0){
+            data.put("token", jwtTokenUtil.generateToken(new User().setUsername(username)));
+            data.put("tokenHead", JWTConfig.tokenHead);
+            return RestResult.success(data);
+        }
+        return RestResult.failure();
     }
 }

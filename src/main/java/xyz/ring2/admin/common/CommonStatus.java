@@ -18,6 +18,8 @@ public enum CommonStatus {
     FAILED_AUTHORITY("权限不足",300),
     FAILED_NOT_LOGIN("暂未登录",402),
     FAILED_BAD_PARAM("参数无效",403),
+    FAILED_PASSWORD("密码错误",303),
+    FAILED_FOUND_NAME("未查询到此用户",304),
     FAILED_CAPTCHA("验证码错误",405);
 
     private String message;

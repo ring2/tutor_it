@@ -14,4 +14,5 @@ import java.util.Map;
 public interface GoodsCategoryService extends IService<GoodsCategory> {
 
     Map<String,Object> selGoodsCategoryByPage(Page<GoodsCategory> page,Integer type);
+    void test();
 }
