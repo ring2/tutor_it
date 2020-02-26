@@ -19,6 +19,6 @@ public class TutorAdminApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        log.info("服务启动成功{}！");
+        log.info("服务启动成功，启动参数【{}】！",args.toString());
     }
 }

@@ -12,7 +12,7 @@
     <artifactId>tutor-admin</artifactId>
     <version>0.0.1</version>
     <name>tutor-admin</name>
-    <description>admin for tutor it</description>
+    <description>admin for tutor it 系统后台管理系统</description>
 
     <properties>
         <java.version>1.8</java.version>
