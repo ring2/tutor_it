@@ -9,14 +9,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import xyz.ring2.admin.common.RestResult;
-import xyz.ring2.admin.core.entity.User;
 import xyz.ring2.admin.core.entity.vo.CaptchaVo;
 import xyz.ring2.admin.core.service.IUserService;
-import xyz.ring2.admin.security.jwt.JWTConfig;
-import xyz.ring2.admin.utils.JwtTokenUtil;
 import xyz.ring2.admin.utils.RedisUtil;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
@@ -28,9 +24,6 @@ import java.util.concurrent.TimeUnit;
 @RestController
 @Slf4j
 public class LoginController {
-
-    @Autowired
-    JwtTokenUtil jwtTokenUtil;
 
     @Autowired
     RedisUtil redisUtil;
@@ -53,7 +46,7 @@ public class LoginController {
         }
         // 首先判断验证码是否有效
         if (StrUtil.isNotEmpty(result) && redisUtil.get(key).equals(result.trim())) {
-           return  userService.validateUser(username, password);
+            return userService.validateUser(username, password);
         }
         return RestResult.failureOfCaptcha();
     }

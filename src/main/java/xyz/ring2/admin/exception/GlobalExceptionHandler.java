@@ -1,10 +1,12 @@
 package xyz.ring2.admin.exception;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import xyz.ring2.admin.common.RestResult;
+import xyz.ring2.admin.core.service.MailService;
 
 /**
  * @author :     weiquanquan
@@ -20,6 +22,9 @@ import xyz.ring2.admin.common.RestResult;
 @Slf4j
 public class GlobalExceptionHandler {
 
+    @Autowired
+    MailService mailService;
+
     @ExceptionHandler(Exception.class)
     public RestResult handleException(Exception exception) {
         // 如果发生的异常为Service异常
@@ -32,6 +37,8 @@ public class GlobalExceptionHandler {
         }
         // 其他未知异常
         String message = exception.getMessage();
+        // 开启线程发送邮件到管理员
+        mailService.sendMailAsync(message);
         log.error("发生了异常【{}】", message);
         return RestResult.failure(message);
     }

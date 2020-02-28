@@ -1,3 +1,24 @@
 spring:
   profiles:
     active: dev
+  # 系统邮箱统一配置
+  mail:
+    host: smtp.qq.com
+    port: 465
+    username: 1129486942@qq.com
+    # 授权码
+    password: ohzcgpypygasfjae
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          socketFactory:
+            class: javax.net.ssl.SSLSocketFactory
+        debug: true
+admin:
+  mail:
+    from: 1129486942@qq.com
+    to: ring2977@163.com
+mail:
+  exception:
+    ftl: exceptionMail.ftl
