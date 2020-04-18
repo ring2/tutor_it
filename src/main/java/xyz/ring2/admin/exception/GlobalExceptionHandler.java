@@ -37,8 +37,8 @@ public class GlobalExceptionHandler {
         }
         // 其他未知异常
         String message = exception.getMessage();
-        // 开启线程发送邮件到管理员
-        mailService.sendMailAsync(message);
+        // 开启线程发送邮件告知管理员
+        //mailService.sendMailAsync(message);
         log.error("发生了异常【{}】", message);
         return RestResult.failure(message);
     }

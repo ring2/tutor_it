@@ -1,7 +1,7 @@
 package xyz.ring2.admin.core.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import xyz.ring2.admin.core.entity.GoodsCategory;
+import xyz.ring2.admin.core.entity.CourseCategory;
 
 /**
     * @author :     weiquanquan
@@ -9,5 +9,5 @@ import xyz.ring2.admin.core.entity.GoodsCategory;
     * description:  
  **/
   
-public interface GoodsCategoryMapper extends BaseMapper<GoodsCategory> {
+public interface CourseCategoryMapper extends BaseMapper<CourseCategory> {
 }

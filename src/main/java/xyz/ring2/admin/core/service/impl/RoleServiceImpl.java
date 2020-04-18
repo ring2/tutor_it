@@ -18,6 +18,7 @@ import xyz.ring2.admin.core.service.IRolePermissionRelService;
 import xyz.ring2.admin.core.service.IRoleService;
 import xyz.ring2.admin.core.service.IUserRoleRelService;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,10 +33,10 @@ import java.util.List;
 @Service
 public class RoleServiceImpl extends ServiceImpl<RoleMapper, Role> implements IRoleService {
 
-    @Autowired
+    @Resource
     RoleMapper roleMapper;
 
-    @Autowired
+    @Resource
     PermissionMapper permissionMapper;
 
     @Autowired

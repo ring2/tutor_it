@@ -9,6 +9,6 @@
     FROM
 	back_user u
 	LEFT JOIN back_user_role_rel r ON u.id = r.user_id
-	LEFT JOIN back_role role ON r.role_id = role.id order by u.id ${ew.customSqlSegment}
+	LEFT JOIN back_role role ON r.role_id = role.id  ${ew.customSqlSegment}
     </select>
 </mapper>

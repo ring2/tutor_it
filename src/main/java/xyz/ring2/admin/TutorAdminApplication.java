@@ -15,9 +15,12 @@ public class TutorAdminApplication implements CommandLineRunner {
     public static void main(String[] args) {
         SpringApplication.run(TutorAdminApplication.class, args);
     }
-
     @Override
     public void run(String... args) {
-        log.info("服务启动成功，启动参数【{}】！",args.toString());
+        StringBuilder startArgs = new StringBuilder();
+        for (String arg : args) {
+            startArgs.append(arg+" ");
+        }
+        log.info("服务启动成功，启动参数【{}】！",startArgs);
     }
 }

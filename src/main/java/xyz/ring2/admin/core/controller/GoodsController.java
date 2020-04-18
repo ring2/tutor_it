@@ -5,7 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import xyz.ring2.admin.common.RestResult;
-import xyz.ring2.admin.core.entity.GoodsCategory;
+import xyz.ring2.admin.core.entity.CourseCategory;
 import xyz.ring2.admin.core.service.GoodsCategoryService;
 import xyz.ring2.admin.utils.FieldCheckUtils;
 
@@ -27,7 +27,7 @@ public class GoodsController {
     @GetMapping("/categories")
     public RestResult<Map<String, Object>> getGoodsCategories(Integer type, Long pageNum, Long pageSize) {
         Map<String, Object> map;
-        Page<GoodsCategory> page = null;
+        Page<CourseCategory> page = null;
         if (pageNum != null && pageSize != null) {
             page = new Page<>(pageNum, pageSize);
         }
@@ -39,7 +39,7 @@ public class GoodsController {
     }
 
     @DeleteMapping()
-    public RestResult delGoodsCategory(GoodsCategory goodsCate) {
+    public RestResult delGoodsCategory(CourseCategory goodsCate) {
         if (goodsCate != null) {
             goodsCate.setCateDeleted(true);
             boolean b = categoryService.updateById(goodsCate);
@@ -50,10 +50,10 @@ public class GoodsController {
     }
 
     @PostMapping
-    public RestResult saveGoodsCate(@RequestBody GoodsCategory goodsCategory) {
-        boolean fieldsNotEmpty = FieldCheckUtils.isFieldsNotEmpty(goodsCategory, GoodsCategory::getCatePid, GoodsCategory::getCateName, GoodsCategory::getCateLevel);
+    public RestResult saveGoodsCate(@RequestBody CourseCategory courseCategory) {
+        boolean fieldsNotEmpty = FieldCheckUtils.isFieldsNotEmpty(courseCategory, CourseCategory::getCatePid, CourseCategory::getCateName, CourseCategory::getCateLevel);
         if (fieldsNotEmpty) {
-            if (categoryService.save(goodsCategory)) {
+            if (categoryService.save(courseCategory)) {
                 return RestResult.success();
             }
             return RestResult.failure();
@@ -62,10 +62,10 @@ public class GoodsController {
     }
 
     @PutMapping
-    public RestResult updateGoodsCateName(@RequestBody GoodsCategory goodsCategory) {
-        boolean fieldsNotEmpty = FieldCheckUtils.isFieldsNotEmpty(goodsCategory, GoodsCategory::getId, GoodsCategory::getCateName);
+    public RestResult updateGoodsCateName(@RequestBody CourseCategory courseCategory) {
+        boolean fieldsNotEmpty = FieldCheckUtils.isFieldsNotEmpty(courseCategory, CourseCategory::getId, CourseCategory::getCateName);
         if (fieldsNotEmpty) {
-            if (categoryService.updateById(goodsCategory)) {
+            if (categoryService.updateById(courseCategory)) {
                 return RestResult.success();
             }
             return RestResult.failure();

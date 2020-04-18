@@ -8,6 +8,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  * <p>
  * 
@@ -27,6 +29,7 @@ public class Role implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
+    @NotBlank
     private String name;
 
     /**

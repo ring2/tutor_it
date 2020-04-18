@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="xyz.ring2.admin.core.mapper.GoodsCategoryMapper">
-  <resultMap id="BaseResultMap" type="xyz.ring2.admin.core.entity.GoodsCategory">
+<mapper namespace="xyz.ring2.admin.core.mapper.CourseCategoryMapper">
+  <resultMap id="BaseResultMap" type="xyz.ring2.admin.core.entity.CourseCategory">
     <!--@mbg.generated-->
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="cate_name" jdbcType="VARCHAR" property="cateName" />

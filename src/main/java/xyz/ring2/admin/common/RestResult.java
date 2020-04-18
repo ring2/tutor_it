@@ -35,55 +35,55 @@ public class RestResult<T> {
         this.message = commonStatus.getMessage();
     }
 
-    public static <T> RestResult success(T data) {
-        return new RestResult<>(CommonStatus.SUCCESS, data);
+    public static <T> RestResult<T> success(T data) {
+        return new RestResult<T>(CommonStatus.SUCCESS, data);
     }
 
-    public static <T> RestResult<T> success() {
+    public static RestResult success() {
         return new RestResult<>(CommonStatus.SUCCESS);
     }
 
-    public static <T> RestResult<T> failureOfAuthority() {
+    public static RestResult failureOfAuthority() {
         return new RestResult<>(CommonStatus.FAILED_AUTHORITY);
     }
 
-    public static <T> RestResult<T> failureOfNotLogin() {
+    public static RestResult failureOfNotLogin() {
         return new RestResult<>(CommonStatus.FAILED_NOT_LOGIN);
     }
 
-    public static <T> RestResult<T> failureOfQuery() {
+    public static RestResult failureOfQuery() {
         return new RestResult<>(CommonStatus.FAILURE);
     }
 
-    public static <T> RestResult<T> failure() {
+    public static RestResult failure() {
         return new RestResult<>(CommonStatus.FAILURE);
     }
 
-    public static <T> RestResult<T> failure(String message) {
+    public static RestResult failure(String message) {
         return new RestResult<>(message);
     }
 
-    public static <T> RestResult<T> failure(CommonStatus commonStatus) {
+    public static RestResult failure(CommonStatus commonStatus) {
         return new RestResult<>(commonStatus);
     }
 
-    public static <T> RestResult<T> failureOfParam() {
+    public static RestResult failureOfParam() {
         return new RestResult<>(CommonStatus.FAILED_BAD_PARAM);
     }
 
-    public static <T> RestResult<T> failureOfRepeatName() {
+    public static RestResult failureOfRepeatName() {
         return new RestResult<>(CommonStatus.REPEAT_NAME);
     }
 
-    public static <T> RestResult<T> failureOfCaptcha() {
+    public static RestResult failureOfCaptcha() {
         return new RestResult<>(CommonStatus.FAILED_CAPTCHA);
     }
 
-    public static <T> RestResult<T> failureOfPassword() {
+    public static RestResult failureOfPassword() {
         return new RestResult<>(CommonStatus.FAILED_PASSWORD);
     }
 
-    public static <T> RestResult<T> failureOfUsername() {
+    public static RestResult failureOfUsername() {
         return new RestResult<>(CommonStatus.FAILED_FOUND_NAME);
     }
 

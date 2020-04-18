@@ -52,7 +52,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         if (ObjectUtil.isNotEmpty(user)) {
             List<Role> roles = roleService.selectRolesByUserId(user.getId());
             user.setRoles(roles);
-        }else {
+        } else {
             throw new ServiceException(CommonStatus.FAILED_FOUND_NAME);
         }
         return user;
@@ -66,8 +66,9 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         page.setSize(pageSize);
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         if (StrUtil.isNotEmpty(userName)) {
-            queryWrapper.like("username", userName);
+            queryWrapper.like("username", "%" + userName + "%");
         }
+        queryWrapper.orderByAsc("u.id");
         Page<UserVo> userPage = this.baseMapper.selUserListWithRoleInfo(page, queryWrapper);
         data.put("total", userPage.getTotal());
         data.put("userList", userPage.getRecords());
@@ -95,7 +96,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     public RestResult validateUser(String username, String password) {
         Map<String, String> data = new HashMap<>();
         User user = findUserByUsername(username);
-        if (user == null){
+        if (user == null) {
             return RestResult.failureOfUsername();
         }
         boolean matches = passwordEncoder.matches(password, user.getPassword());
@@ -103,7 +104,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             return RestResult.failureOfPassword();
         }
         List<User> list = lambdaQuery().eq(User::getUsername, username).list();
-        if (list.size() > 0){
+        if (list.size() > 0) {
             data.put("token", jwtTokenUtil.generateToken(new User().setUsername(username)));
             data.put("tokenHead", JWTConfig.tokenHead);
             return RestResult.success(data);

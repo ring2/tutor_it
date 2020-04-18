@@ -17,6 +17,7 @@ import xyz.ring2.admin.core.service.IRolePermissionRelService;
 @Service
 public class RolePermissionRelServiceImpl extends ServiceImpl<RolePermissionRelMapper, RolePermissionRel> implements IRolePermissionRelService {
 
+    @Override
     public boolean delRelByRoleAndPerId(Integer perId, Long roleId) {
         return lambdaUpdate().eq(RolePermissionRel::getRoleId, roleId).eq(RolePermissionRel::getPermissionId, perId).remove();
     }

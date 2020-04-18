@@ -45,7 +45,6 @@ public class FieldCheckUtils {
     /**
      * @param obj    实体类
      * @param fields 不能为null且String类型的字段值不能为空的字段名
-     * @return
      */
     public static <T> boolean isFieldsNotEmpty(Object obj, IGetter<T>... fields) {
         if (obj == null) {
@@ -65,9 +64,6 @@ public class FieldCheckUtils {
     /**
      * 根据属性名获取属性值
      *
-     * @param obj
-     * @param fieldName
-     * @return
      */
     private static Object getValueByFieldName(Object obj, String fieldName) {
         Object value = null;
@@ -85,9 +81,6 @@ public class FieldCheckUtils {
     /**
      * 判断该属性名所对应的类型是否是String 类型
      *
-     * @param object
-     * @param fieldName
-     * @return
      */
     private static boolean isStringType(Object object, String fieldName) {
         boolean flag = false;

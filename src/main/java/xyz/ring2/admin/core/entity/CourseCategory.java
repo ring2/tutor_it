@@ -13,7 +13,7 @@ import java.io.Serializable;
  **/
   
 @Data
-public class GoodsCategory implements Serializable{
+public class CourseCategory implements Serializable{
     /**
     * 分类id
     */

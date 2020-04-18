@@ -25,6 +25,7 @@ public class ExceptionMailSend extends Thread {
     @Override
     public void run() {
         try {
+            log.info("正在发送邮件");
             mailService.sendExceptionMail(errorMessage);
         } catch (Exception e) {
             log.error("发送报警邮件发生了异常-> {}",e.getMessage());

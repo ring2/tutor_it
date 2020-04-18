@@ -32,10 +32,11 @@ public class LoginController {
     IUserService userService;
 
     /**
+     * 判断用户登录时是管理员还是专家，后续对菜单进行动态变化
      * @return 根据用户的账号密码及验证码进行校验登陆并校验验证码
      */
     @PostMapping("/login")
-    public RestResult<Map> login(@RequestBody CaptchaVo captchaVo) {
+    public RestResult<Map> login(@RequestBody CaptchaVo captchaVo,String userType) {
         String username = captchaVo.getUsername();
         String password = captchaVo.getPassword();
         String key = captchaVo.getKey();
@@ -53,7 +54,7 @@ public class LoginController {
 
     // 获取验证码,随机生成标识该验证码的key 设置进redis 5分钟失效
     @GetMapping("/captcha")
-    public RestResult<String> getCaptcha() {
+    public RestResult getCaptcha() {
         ArithmeticCaptcha captcha = new ArithmeticCaptcha(100, 40);
         captcha.setLen(2);  // 几位数运算，默认是两位
         captcha.getArithmeticString();  // 获取运算的公式：3+2=?
