@@ -23,6 +23,6 @@ public class UserAuthenticationEntryPointHandler implements AuthenticationEntryP
      */
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse httpServletResponse, AuthenticationException exception){
-        RestUtil.ResponseJsonMsg(httpServletResponse, RestResult.failureOfNotLogin());
+        RestUtil.responseJsonMsg(httpServletResponse, RestResult.failureOfNotLogin());
     }
 }

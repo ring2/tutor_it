@@ -37,22 +37,22 @@ public class JWTConfig {
 
 
     public void setSecret(String secret) {
-        this.secret = secret;
+        JWTConfig.secret = secret;
     }
 
     public void setTokenHeader(String tokenHeader) {
-        this.tokenHeader = tokenHeader;
+        JWTConfig.tokenHeader = tokenHeader;
     }
 
     public void setTokenHead(String tokenHead) {
-        this.tokenHead = tokenHead;
+        JWTConfig.tokenHead = tokenHead;
     }
 
     public void setExpiration(Integer expiration) {
-        this.expiration = expiration * 1000;
+        JWTConfig.expiration = expiration * 1000;
     }
 
     public void setAntMatchers(String antMatchers) {
-        this.antMatchers = antMatchers;
+        JWTConfig.antMatchers = antMatchers;
     }
 }

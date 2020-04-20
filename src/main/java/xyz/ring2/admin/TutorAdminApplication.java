@@ -6,7 +6,7 @@ import org.springframework.boot.SpringApplication;
 import xyz.ring2.admin.common.TutorITApplication;
 
 /**
- * TutorIT-Admin 启动类入口
+ * Tutor-it 启动类入口
  */
 @TutorITApplication
 @Slf4j

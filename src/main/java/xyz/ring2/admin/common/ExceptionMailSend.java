@@ -5,10 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import xyz.ring2.admin.core.service.MailService;
-import xyz.ring2.admin.core.service.impl.MailServiceImpl;
 
 /**
- * @author :     weiquanquan
+ * @author :     ring2
  * @date :       2020/2/28 08:32
  * description:  发送报警邮件线程
  **/

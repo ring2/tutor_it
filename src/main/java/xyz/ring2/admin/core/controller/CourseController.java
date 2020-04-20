@@ -1,16 +1,20 @@
 package xyz.ring2.admin.core.controller;
 
-import cn.hutool.core.collection.CollUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.*;
-import java.lang.reflect.Array;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * @author :     weiquanquan
@@ -33,8 +37,9 @@ public class CourseController {
                 file1.delete();
             }
             FileCopyUtils.copy(file.getInputStream(), new FileOutputStream(file1));
-            if (true)
+            if (true) {
                 throw new NullPointerException();
+            }
             return "success";
         }
         return "failure";
@@ -102,8 +107,9 @@ public class CourseController {
         arrayList.add("16");
 
         for (int i = 0 ; i < arrayList.size(); i++){
-            if (i == 1)
-            arrayList.remove(2);
+            if (i == 1) {
+                arrayList.remove(2);
+            }
             System.out.println(i);
         }
         System.out.println(arrayList.toString());

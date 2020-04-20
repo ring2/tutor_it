@@ -12,13 +12,10 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import xyz.ring2.admin.core.entity.User;
 import xyz.ring2.admin.core.service.IUserService;
 import xyz.ring2.admin.security.handle.UserAuthAccessDeniedHandler;
 import xyz.ring2.admin.security.handle.UserAuthenticationEntryPointHandler;
@@ -108,6 +105,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new JwtTokenUtil();
     }
 
+    @Override
     @Bean
     public UserDetailsService userDetailsService(){
         return userService::findUserByUsername;

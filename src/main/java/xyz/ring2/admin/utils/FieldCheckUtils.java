@@ -15,10 +15,11 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Supplier;
 
 /**
- * @author :     weiquanquan
+ * @author :     ring2
  * @date :       2020/2/6 13:19
- * description:  判断实体类中某些属性是否为空的工具类
+ * description:  判断实体类中某些属性是否为空的工具类，已弃用
  **/
+@Deprecated
 public class FieldCheckUtils {
 
     public static Map<Class, SerializedLambda> cacheClass = new ConcurrentHashMap<>();
@@ -54,7 +55,7 @@ public class FieldCheckUtils {
             String filedName = getFieldName(field);
             Object valueByFieldName = getValueByFieldName(obj, filedName);
             // 如果该属性的值为null或者它是String类型且值为空也返回false
-            if (valueByFieldName == null || isStringType(obj, filedName) && valueByFieldName.equals("")) {
+            if (valueByFieldName == null || isStringType(obj, filedName) && "".equals(valueByFieldName)) {
                 return false;
             }
         }

@@ -121,8 +121,8 @@ public class UserController {
     @PutMapping("/updateUserRole/{userId}/{selectedRoleId}")
     public RestResult updateUserRole(@PathVariable Integer userId,@PathVariable("selectedRoleId") Integer roleId){
 //        LambdaUpdateChainWrapper<UserRoleRel> eq = userRoleRelService.lambdaUpdate().eq(UserRoleRel::getUserId, userId);
-        UpdateWrapper<UserRoleRel> user_id = new UpdateWrapper<UserRoleRel>().eq("user_id", userId);
-        boolean b = userRoleRelService.saveOrUpdate(new UserRoleRel().setUserId(userId).setRoleId(roleId), user_id);
+        UpdateWrapper<UserRoleRel> userId1 = new UpdateWrapper<UserRoleRel>().eq("user_id", userId);
+        boolean b = userRoleRelService.saveOrUpdate(new UserRoleRel().setUserId(userId).setRoleId(roleId), userId1);
         if (b){
             return RestResult.success();
         }

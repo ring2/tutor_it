@@ -6,8 +6,6 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import xyz.ring2.admin.common.CommonStatus;
@@ -69,6 +67,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             queryWrapper.like("username", "%" + userName + "%");
         }
         queryWrapper.orderByAsc("u.id");
+
         Page<UserVo> userPage = this.baseMapper.selUserListWithRoleInfo(page, queryWrapper);
         data.put("total", userPage.getTotal());
         data.put("userList", userPage.getRecords());

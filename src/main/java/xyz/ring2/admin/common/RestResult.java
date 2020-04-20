@@ -26,8 +26,9 @@ public class RestResult<T> {
         this.data = data;
     }
 
-    public RestResult(String message) {
+    public RestResult(String message,Integer statusCode) {
         this.message = message;
+        this.statusCode = statusCode;
     }
 
     public RestResult(CommonStatus commonStatus) {
@@ -59,8 +60,8 @@ public class RestResult<T> {
         return new RestResult<>(CommonStatus.FAILURE);
     }
 
-    public static RestResult failure(String message) {
-        return new RestResult<>(message);
+    public static RestResult failure(String message,Integer statusCode) {
+        return new RestResult<>(message,statusCode);
     }
 
     public static RestResult failure(CommonStatus commonStatus) {

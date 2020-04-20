@@ -43,7 +43,9 @@ public class GoodsController {
         if (goodsCate != null) {
             goodsCate.setCateDeleted(true);
             boolean b = categoryService.updateById(goodsCate);
-            if (b) return RestResult.success();
+            if (b) {
+                return RestResult.success();
+            }
             return RestResult.failure();
         }
         return RestResult.failure();

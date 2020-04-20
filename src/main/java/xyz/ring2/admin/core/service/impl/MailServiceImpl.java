@@ -62,7 +62,6 @@ public class MailServiceImpl implements MailService {
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
         simpleMailMessage.setFrom(from);
         simpleMailMessage.setTo(to);
-        //simpleMailMessage.setCc(cc);
         simpleMailMessage.setSubject(subject);
         simpleMailMessage.setText(content);
         javaMailSender.send(simpleMailMessage);
@@ -92,14 +91,14 @@ public class MailServiceImpl implements MailService {
     }
 
     @Override
-    public void sendMailWithImg(String from, String to, String subject, String content, String[] srePAth, String[] resIds) {
+    public void sendMailWithImg(String from, String to, String subject, String content, String[] srePath, String[] resIds) {
         if (StrUtil.isEmpty(from)) {
             from = defaultMailFrom;
         }
         if (StrUtil.isEmpty(to)) {
             to = defaultMailTo;
         }
-        if (srePAth.length != resIds.length) {
+        if (srePath.length != resIds.length) {
             System.out.println("发送失败");
             return;
         }
@@ -110,8 +109,8 @@ public class MailServiceImpl implements MailService {
             mimeMessageHelper.setFrom(from);
             mimeMessageHelper.setSubject(subject);
             mimeMessageHelper.setText(content, true);
-            for (int i = 0; i < srePAth.length; i++) {
-                FileSystemResource res = new FileSystemResource(new File(srePAth[i]));
+            for (int i = 0; i < srePath.length; i++) {
+                FileSystemResource res = new FileSystemResource(new File(srePath[i]));
                 mimeMessageHelper.addInline(resIds[i], res);
             }
             javaMailSender.send(mimeMessage);
@@ -128,7 +127,7 @@ public class MailServiceImpl implements MailService {
         helper.setFrom(defaultMailFrom);
         helper.setTo(defaultMailTo);
         helper.setSubject("tutor-admin 系统出现未知错误");
-        Map<String, String> exceptionMessage = new HashMap<>();
+        Map<String, String> exceptionMessage = new HashMap<>(16);
         exceptionMessage.put("exceptionMessage", errorMessage);
         Template template = freeMarkerConfigurer.getConfiguration().getTemplate(defaultMailFtl);
         String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, exceptionMessage);
@@ -152,7 +151,7 @@ public class MailServiceImpl implements MailService {
         helper.setFrom(from);
         helper.setTo(to);
         helper.setSubject(subject);
-        Map<String, String> exceptionMessage = new HashMap<>();
+        Map<String, String> exceptionMessage = new HashMap<>(16);
         exceptionMessage.put("exceptionMessage", errorMessage);
         Template template = freeMarkerConfigurer.getConfiguration().getTemplate(templateFile);
         String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, exceptionMessage);

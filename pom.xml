@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>xyz.ring2</groupId>
-    <artifactId>tutor-admin</artifactId>
+    <artifactId>tutor_it</artifactId>
     <version>0.0.1</version>
     <name>tutor-admin</name>
-    <description>admin for tutor it 系统后台管理系统</description>
+    <description> tutor it 单体系统</description>
 
     <properties>
         <java.version>1.8</java.version>
@@ -143,6 +143,12 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
+        <!-- 在线接口文档-->
+<!--        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-spring-boot-starter</artifactId>
+            <version>2.0.2</version>
+        </dependency>-->
     </dependencies>
 
     <build>

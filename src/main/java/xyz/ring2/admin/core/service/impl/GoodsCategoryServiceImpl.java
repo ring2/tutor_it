@@ -70,9 +70,11 @@ public class GoodsCategoryServiceImpl extends ServiceImpl<CourseCategoryMapper, 
      */
     private List<GoodsCategoryTree> getGoodsCategoryTree(List<CourseCategory> originGoodsCate, Integer type) {
         List<GoodsCategoryTree> list = new ArrayList<>();
-        if (originGoodsCate.size() > 0) {        //递归调用终结点
+        //递归调用终结点
+        if (originGoodsCate.size() > 0) {
             originGoodsCate.forEach(
-                    goodsCategory -> {  // 对每个分类进行遍历
+                    // 对每个分类进行遍历
+                    goodsCategory -> {
                         //获取到该分类的所有子分类
                         List<CourseCategory> children;
                         // 判断type是否为2，如果为2则至获取前两级的分类即可

@@ -16,7 +16,7 @@ public class RestUtil<T> {
     private RestUtil(){
 
     }
-    public static void ResponseJsonMsg(ServletResponse response,RestResult restResult){
+    public static void responseJsonMsg(ServletResponse response,RestResult restResult){
         PrintWriter out = null;
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json");
