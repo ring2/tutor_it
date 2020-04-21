@@ -6,6 +6,10 @@ import xyz.ring2.admin.common.RestResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+import javax.validation.Valid;
+import ${package.Entity}.dto.${entity}DTO;
+import xyz.ring2.admin.common.QueryParam;
+import ${package.Service}.${table.serviceName};
 <#if restControllerStyle>
 import org.springframework.web.bind.annotation.RestController;
 <#else>
@@ -58,7 +62,6 @@ public class ${table.controllerName} {
         return base${entity}Service.delete(id);
     }
 
-
    /**
     *  修改
     */
@@ -66,7 +69,6 @@ public class ${table.controllerName} {
     public RestResult update(@RequestBody @Valid ${entity}DTO object) {
         return base${entity}Service.update(object);
     }
-
 
    /**
     *  分页查询

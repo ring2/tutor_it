@@ -1,4 +1,6 @@
 package ${package.Entity}.dto;
+import lombok.Data;
+import ${package.Entity}.${entity};
 
 
 /**

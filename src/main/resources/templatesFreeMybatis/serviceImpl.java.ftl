@@ -11,6 +11,10 @@ import xyz.ring2.admin.common.RestResult;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import xyz.ring2.admin.common.QueryParam;
+import cn.hutool.core.bean.BeanUtil;
+import ${package.Entity}.dto.${entity}DTO;
 
 /**
  * <p>
@@ -33,9 +37,9 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
 
  @Override
  public RestResult create(${entity}DTO object) {
-    ${entity} target = new ${entity};
+    ${entity} target = new ${entity}();
     BeanUtil.copyProperties(object,target);
-    int i = this.baseMapper.insert(object);
+    int i = this.baseMapper.insert(target);
     if (i > 0) {
         return RestResult.success();
     }
@@ -44,7 +48,7 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
 
  @Override
  public RestResult delete(Integer id) {
-    int i = this.baseMapper.deleteById(object);
+    int i = this.baseMapper.deleteById(id);
     if (i > 0) {
     return RestResult.success();
     }
@@ -53,9 +57,9 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
 
  @Override
  public RestResult update(${entity}DTO object) {
-    ${entity} target = new ${entity};
+    ${entity} target = new ${entity}();
     BeanUtil.copyProperties(object,target);
-    int i = this.baseMapper.updateById(object);
+    int i = this.baseMapper.updateById(target);
     if (i > 0) {
     return RestResult.success();
     }
@@ -71,7 +75,7 @@ public class ${table.serviceImplName} extends ${superServiceImplClass}<${table.m
     QueryWrapper<${entity}> queryWrapper = new QueryWrapper<>();
     //queryWrapper wait to set something
 
-    Page<${entity}> page = this.baseMapper.selectPage(page, queryWrapper);
+    page = this.baseMapper.selectPage(page, queryWrapper);
     data.put("total", page.getTotal());
     data.put("list", page.getRecords());
     return RestResult.success(data);

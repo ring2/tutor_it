@@ -3,6 +3,8 @@ package ${package.Service};
 import ${package.Entity}.${entity};
 import ${superServiceClassPackage};
 import xyz.ring2.admin.common.RestResult;
+import ${package.Entity}.dto.${entity}DTO;
+import xyz.ring2.admin.common.QueryParam;
 /**
  * <p>
  * ${table.comment!} 服务类
@@ -39,7 +41,6 @@ public interface ${table.serviceName} extends ${superServiceClass}<${entity}> {
   * @return
   */
   RestResult update(${entity}DTO object);
-
 
  /**
    * 分页查询某实体

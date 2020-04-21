@@ -41,19 +41,20 @@ public class MyGeneratorTemplate {
     private static final String PARENT = "xyz.ring2.admin";
 
     /**
-     * 系统各个模块名称
+     * 当前系统路径
      */
-    private static final String ADMIN = "generator";
-    private static final String ORDER = "order";
-    private static final String PORTAL = "portal";
-    private static final String MEDIA = "media";
-    private static final String MONITOR = "monitor";
-
     private static final String projectPath = System.getProperty("user.dir");
+
+    /**
+     * 模块名称
+     */
+    private static String moduleName  = "";
 
 
     public static void main(String[] args) {
         AutoGenerator autoGenerator = new AutoGenerator();
+        // 设置模块名称
+        moduleName = scanner("模块名称:");
         // 采用FreeMarker模板引擎
         FreemarkerTemplateEngine freemarker = new FreemarkerTemplateEngine();
         autoGenerator.setDataSource(dataSourceConfig())
@@ -99,7 +100,7 @@ public class MyGeneratorTemplate {
         strategyConfig.setVersionFieldName(OPTIMISTIC_LOCKING);
         // 逻辑删除属性名称
         strategyConfig.setLogicDeleteFieldName(LOGIC_DELETE);
-        strategyConfig.setInclude(scanner("多个表名，以英文逗号分割").split(","));
+        strategyConfig.setInclude(scanner("表名，若有多个表以英文逗号分割").split(","));
         return strategyConfig;
     }
 
@@ -108,8 +109,9 @@ public class MyGeneratorTemplate {
      */
     private static PackageConfig packageConfig() {
         PackageConfig packageConfig = new PackageConfig();
+
         packageConfig.setParent(PARENT);
-        packageConfig.setModuleName(ADMIN);
+        packageConfig.setModuleName(moduleName);
         return packageConfig;
     }
 
@@ -144,6 +146,8 @@ public class MyGeneratorTemplate {
      * @return 注入配置，通过该配置，可注入自定义参数等操作以实现个性化操作
      */
     private static InjectionConfig injectionConfig() {
+        String path = "/tutor-admin/src/main/java/"+PARENT.replaceAll("\\.","/")+"/"+moduleName+"/entity/dto";
+        System.out.println(path);
         // 自定义输出配置
         List<FileOutConfig> focList = new ArrayList<>();
         // 自定义配置会被优先输出
@@ -151,7 +155,7 @@ public class MyGeneratorTemplate {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 // 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
-                return projectPath + "/tutor-admin/src/main/java/xyz/ring2/admin/generator/entity/dto"
+                return projectPath + path
                         + "/" + tableInfo.getEntityName() + "DTO" + StringPool.DOT_JAVA;
             }
         });
