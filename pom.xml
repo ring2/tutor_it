@@ -136,7 +136,7 @@
         <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
-            <version>26.0-jre</version>
+            <version>29.0-jre</version>
         </dependency>
         <!-- Spring Boot 对 JavaMailSender 邮件发送的整合-->
         <dependency>
